@@ -3,7 +3,7 @@ Simple, adaptable component to render PDF files in React
 
 ### Installation
 
-`npm install react-pdf-pages, github: 'gkaemmer/react-pdf-pages'`
+`npm install react-pdf-pages`
 
 ### Usage
 
