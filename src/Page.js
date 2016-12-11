@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-export default class PDFPage extends Component {
+export default class Page extends Component {
   static propTypes = {
     page: React.PropTypes.shape({
       key: React.PropTypes.number.isRequired,
