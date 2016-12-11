@@ -1,6 +1,10 @@
 # react-pdf-pages
 Simple, adaptable component to render PDF files in React
 
+### Installation
+
+`npm install react-pdf-pages, github: 'gkaemmer/react-pdf-pages'`
+
 ### Usage
 
 `react-pdf-pages` exports two components `PDF` and `Page`, which you can import like this:
