@@ -33,7 +33,14 @@ export default class Page extends Component {
           canvasContext: context,
           viewport: viewport
         }
-        page.render(renderContext)
+        page.render(renderContext).promise.then(() => {
+          if (typeof this.props.onSizeReady === "function") {
+            const rect = canvas.getBoundingClientRect();
+            const height = rect.bottom - rect.top;
+            const width = rect.right - rect.left;
+            this.props.onSizeReady(width, height);
+          }
+        });
       })
       .catch(error => {
         throw error;
@@ -41,7 +48,7 @@ export default class Page extends Component {
   }
 
   componentDidMount() {
-    this.renderPage()
+    this.renderPage();
   }
 
   render() {

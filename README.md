@@ -62,6 +62,7 @@ The PDF wrapper component. Renders only its children. Props:
 Renders a page of a PDF. Always grows to fill the width of its parent, and its height depends on the height of the rendered PDF page. Props:
 
 * `page`: A page from `pages` passed to `onComplete`.
+* `onSizeReady: function(width, height)`: Called when the PDF page has been rendered.
 
 ## Importing PDF.js
 To use `react-pdf-pages`, you must include PDF.js in the page as the global `PDFJS`. To do this, it's recommended that you include `pdfjs-dist` in your bundle, like so:
