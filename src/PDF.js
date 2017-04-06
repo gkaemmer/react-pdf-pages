@@ -15,8 +15,10 @@ export default class PDF extends Component {
     onProgress: React.PropTypes.func,
     onComplete: React.PropTypes.func,
     onError: React.PropTypes.func,
-    url: React.PropTypes.string.isRequired
-  }
+    url: React.PropTypes.string.isRequired,
+    style: React.PropTypes.object,
+    className: React.PropTypes.string
+  };
 
   constructor(props) {
     super(props);
@@ -89,7 +91,7 @@ export default class PDF extends Component {
 
   render() {
     return (
-      <div>
+      <div style={this.props.style} className={this.props.className}>
         {this.props.children}
       </div>
     );
