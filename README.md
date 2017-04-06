@@ -58,6 +58,8 @@ The PDF wrapper component. Renders only its children. Props:
 * `onProgress: function(loadedObj)`: Called as the PDF loads. Use `loadedObj.loaded` and `loadedObj.total` to show loading progress. See the full-featured example for usage.
 * `onError: function(error)`: Called when the PDF fails to load. `error.message` contains the message from PDF.js.
 
+PDF will pass the `style` and `className` props to the resulting container `div`.
+
 #### `Page`
 Renders a page of a PDF. Always grows to fill the width of its parent, and its height depends on the height of the rendered PDF page. Props:
 
