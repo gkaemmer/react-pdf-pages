@@ -53,7 +53,7 @@ export default class Page extends Component {
 
   render() {
     return (
-      <canvas style={{ width: '100%', height: 'auto' }} ref='canvas' />
+      <canvas style={{ width: '100%', height: 'auto', display: 'block' }} ref='canvas' />
     )
   }
 }

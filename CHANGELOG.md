@@ -1,3 +1,6 @@
+### v0.1.4
+- Added `display: block` to each page's canvas element. Sometimes, a `canvas`'s container element would have a few pixels of extra height if it's display was `inline`.
+
 ### v0.1.3
 - Fixed a bug where quickly changing `props.url` could render an incorrect document.
 
