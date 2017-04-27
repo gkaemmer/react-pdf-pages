@@ -1,3 +1,6 @@
+### v0.1.3
+- Fixed a bug where quickly changing `props.url` could render an incorrect document.
+
 ### v0.1.2
 - Pass `className` and `style` props on `PDF` to container div.
 
