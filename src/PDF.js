@@ -11,6 +11,13 @@ function buildPages(file) {
 }
 
 export default class PDF extends Component {
+  task = null;
+  loadedUrl = null;
+  file = null;
+  error = null;
+  loaded = 0;
+  total = 100;
+
   static propTypes = {
     onProgress: React.PropTypes.func,
     onComplete: React.PropTypes.func,
@@ -20,24 +27,11 @@ export default class PDF extends Component {
     className: React.PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loadedUrl: null,
-      file: null,
-      error: null,
-      loaded: 0,
-      total: 100
-    };
-  }
-
   onProgress(progressData) {
     if (progressData.total) {
-      this.setState({
-        loaded: progressData.loaded,
-        total: progressData.total
-      });
+      this.loaded = progressData.loaded;
+      this.total = progressData.total;
+
       if (typeof this.props.onProgress === 'function')
         this.props.onProgress(progressData);
     }
@@ -45,39 +39,50 @@ export default class PDF extends Component {
 
   loadPDF() {
     // Destroy any old file
-    if (this.state.file)
-        this.state.file.destroy();
+    if (this.file)
+        this.file.destroy();
 
-    // Clear the state
-    this.setState({
-      loadedUrl: this.props.url,
-      error: null,
-      loaded: 0,
-      total: 0,
-      file: null
-    });
+    // Cancel any old task
+    if (this.task)
+      this.task.onProgress = () => null;
+
+    // Clear this instance
+    this.loadedUrl = this.props.url;
+    this.error = null;
+    this.loaded = 0;
+    this.total = 0;
+    this.file = null;
 
     // Load the PDF
     const task = window.PDFJS.getDocument(this.props.url);
     task.onProgress = this.onProgress.bind(this);
 
+    this.task = task;
+
     return task
       .then(file => {
-        this.setState({ file });
+        // Return if this task has been replaced by a new one
+        if (task !== this.task)
+          return;
+
+        this.file = file;
         if (typeof this.props.onComplete === 'function')
           this.props.onComplete(buildPages(file));
       })
       .catch(error => {
-        this.setState({ error });
+        // Return if this task has been replaced by a new one
+        if (task !== this.task)
+          return;
+
+        this.error = error;
         if (typeof this.props.onError === 'function')
           this.props.onError(error);
       });
   }
 
   componentDidUpdate() {
-    if (this.props.url != this.state.loadedUrl) {
+    if (this.props.url != this.loadedUrl)
       this.loadPDF();
-    }
   }
 
   componentDidMount() {
@@ -85,8 +90,8 @@ export default class PDF extends Component {
   }
 
   componentWillUnmount() {
-    if (this.state.file)
-      this.state.file.destroy();
+    if (this.file)
+      this.file.destroy();
   }
 
   render() {
