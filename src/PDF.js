@@ -23,6 +23,7 @@ export default class PDF extends Component {
     onComplete: React.PropTypes.func,
     onError: React.PropTypes.func,
     url: React.PropTypes.string.isRequired,
+    headers: React.PropTypes.object,
     style: React.PropTypes.object,
     className: React.PropTypes.string
   };
@@ -53,8 +54,15 @@ export default class PDF extends Component {
     this.total = 0;
     this.file = null;
 
+    let initObject = this.props.url;
+
+    // If custom headers are passed, add them to the PDFJS init object
+    if (this.props.headers) {
+      initObject = { httpHeaders: this.props.headers, url: this.props.url };
+    }
+
     // Load the PDF
-    const task = window.PDFJS.getDocument(this.props.url);
+    const task = window.PDFJS.getDocument(initObject);
     task.onProgress = this.onProgress.bind(this);
 
     this.task = task;
