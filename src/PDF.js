@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 function buildPages(file) {
   let arr = [];
@@ -33,19 +33,17 @@ export default class PDF extends Component {
       this.loaded = progressData.loaded;
       this.total = progressData.total;
 
-      if (typeof this.props.onProgress === 'function')
+      if (typeof this.props.onProgress === "function")
         this.props.onProgress(progressData);
     }
   }
 
   loadPDF() {
     // Destroy any old file
-    if (this.file)
-        this.file.destroy();
+    if (this.file) this.file.destroy();
 
     // Cancel any old task
-    if (this.task)
-      this.task.onProgress = () => null;
+    if (this.task) this.task.onProgress = () => null;
 
     // Clear this instance
     this.loadedUrl = this.props.url;
@@ -70,27 +68,24 @@ export default class PDF extends Component {
     return task
       .then(file => {
         // Return if this task has been replaced by a new one
-        if (task !== this.task)
-          return;
+        if (task !== this.task) return;
 
         this.file = file;
-        if (typeof this.props.onComplete === 'function')
+        if (typeof this.props.onComplete === "function")
           this.props.onComplete(buildPages(file));
       })
       .catch(error => {
         // Return if this task has been replaced by a new one
-        if (task !== this.task)
-          return;
+        if (task !== this.task) return;
 
         this.error = error;
-        if (typeof this.props.onError === 'function')
-          this.props.onError(error);
+        if (typeof this.props.onError === "function") this.props.onError(error);
+        else throw error;
       });
   }
 
   componentDidUpdate() {
-    if (this.props.url != this.loadedUrl)
-      this.loadPDF();
+    if (this.props.url != this.loadedUrl) this.loadPDF();
   }
 
   componentDidMount() {
@@ -98,8 +93,7 @@ export default class PDF extends Component {
   }
 
   componentWillUnmount() {
-    if (this.file)
-      this.file.destroy();
+    if (this.file) this.file.destroy();
   }
 
   render() {
