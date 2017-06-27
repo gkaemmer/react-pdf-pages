@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
 export default class Page extends Component {
   static propTypes = {
@@ -9,30 +9,30 @@ export default class Page extends Component {
         getPage: React.PropTypes.func.isRequired
       })
     }).isRequired
-  }
+  };
 
   renderPage() {
-    const { key, file } = this.props.page
-    file.getPage(key)
+    const { key, file } = this.props.page;
+    file
+      .getPage(key)
       .then(page => {
         // Make pages look nice on retina screens
-        const pixelScale = window.devicePixelRatio || 1
-        const scale = 2
-        const viewport = page.getViewport(scale * pixelScale)
+        const pixelScale = window.devicePixelRatio || 1;
+        const scale = 2;
+        const viewport = page.getViewport(scale * pixelScale);
 
         // Prepare canvas using PDF page dimensions
-        const canvas = ReactDOM.findDOMNode(this.refs['canvas'])
-        if (!canvas)
-          return;
-        const context = canvas.getContext('2d')
-        canvas.height = viewport.height
-        canvas.width = viewport.width
+        const canvas = ReactDOM.findDOMNode(this.refs["canvas"]);
+        if (!canvas) return;
+        const context = canvas.getContext("2d");
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
 
         // Render PDF page into canvas context
         const renderContext = {
           canvasContext: context,
           viewport: viewport
-        }
+        };
         page.render(renderContext).promise.then(() => {
           if (typeof this.props.onSizeReady === "function") {
             const rect = canvas.getBoundingClientRect();
@@ -52,8 +52,13 @@ export default class Page extends Component {
   }
 
   render() {
+    const { style, className } = this.props;
     return (
-      <canvas style={{ width: '100%', height: 'auto', display: 'block' }} ref='canvas' />
-    )
+      <canvas
+        className={className}
+        style={{ ...style, width: "100%", height: "auto", display: "block" }}
+        ref="canvas"
+      />
+    );
   }
 }
