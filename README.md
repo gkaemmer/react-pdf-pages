@@ -57,14 +57,16 @@ The PDF wrapper component. Renders only its children. Props:
 * `onComplete: function(pages)`: Called when the file is done loading and is ready to render. To render pages, keep track of the value of `pages` and pass them to `Page`s components.
 * `onProgress: function(loadedObj)`: Called as the PDF loads. Use `loadedObj.loaded` and `loadedObj.total` to show loading progress. See the full-featured example for usage.
 * `onError: function(error)`: Called when the PDF fails to load. `error.message` contains the message from PDF.js.
+* `header: object`: An object whose key/value pairs will be included as headers in the HTTP request to `url`.
 
-PDF will pass the `style` and `className` props to the resulting container `div`.
 
 #### `Page`
 Renders a page of a PDF. Always grows to fill the width of its parent, and its height depends on the height of the rendered PDF page. Props:
 
 * `page`: A page from `pages` passed to `onComplete`.
 * `onSizeReady: function(width, height)`: Called when the PDF page has been rendered.
+
+Both `PDF` and `Page` will pass the `style` and `className` props to their immediate inner elements.
 
 ## Importing PDF.js
 To use `react-pdf-pages`, you must include PDF.js in the page as the global `PDFJS`. To do this, it's recommended that you include `pdfjs-dist` in your bundle, like so:
