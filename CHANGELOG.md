@@ -1,3 +1,6 @@
+### v0.1.7
+- Pass raw PDFJS `file` object as second argument to `onComplete`.
+
 ### v0.1.6
 - Performance improvements (especially for phones with small screens)--the width of the canvas (using `clientWidth`) now determines the pixel density of the rendered PDF.
 
