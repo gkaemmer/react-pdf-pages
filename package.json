@@ -1,6 +1,6 @@
 {
   "name": "react-pdf-pages",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Adaptable react component to render PDFs",
   "main": "lib/index.js",
   "repository": {
