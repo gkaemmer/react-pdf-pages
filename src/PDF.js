@@ -72,7 +72,7 @@ export default class PDF extends Component {
 
         this.file = file;
         if (typeof this.props.onComplete === "function")
-          this.props.onComplete(buildPages(file));
+          this.props.onComplete(buildPages(file), file);
       })
       .catch(error => {
         // Return if this task has been replaced by a new one
