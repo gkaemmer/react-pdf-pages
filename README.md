@@ -50,23 +50,26 @@ class PDFViewer extends Component {
 
 ## API
 
-### `PDF`
+#### `PDF`
 The PDF wrapper component. Renders only its children. Props:
 
 * `url: string`: The url to load. *Warning: PDFJS uses XMLHttpRequests under the hood, so loading a URL from a different domain requires CORS permissions.*
-* `onComplete: function(pages)`: Called when the file is done loading and is ready to render. To render pages, keep track of the value of `pages` and pass them to `Page`s components.
+* `onComplete: function(pages, file)`: Called when the file is done loading and is ready to render. To render pages, keep track of the value of `pages` and pass them to `Page`s components. *Note: unless you're doing low-level operations on the PDFJS `file` object, you can safely ignore the second argument.*
 * `onProgress: function(loadedObj)`: Called as the PDF loads. Use `loadedObj.loaded` and `loadedObj.total` to show loading progress. See the full-featured example for usage.
 * `onError: function(error)`: Called when the PDF fails to load. `error.message` contains the message from PDF.js.
 * `headers: object`: An object whose key/value pairs will be included as headers in the HTTP request to `url`.
 
 
 #### `Page`
-Renders a page of a PDF. Always grows to fill the width of its parent, and its height depends on the height of the rendered PDF page. Props:
+Renders a page of a PDF. Always grows to fill the width of its parent, and its height depends on the height of the rendered PDF page. The Props:
 
 * `page`: A page from `pages` passed to `onComplete`.
-* `onSizeReady: function(width, height)`: Called when the PDF page has been rendered.
+* `onSizeReady: function(width, height)`: Called when the PDF page's size has been determined.
 
 Both `PDF` and `Page` will pass the `style` and `className` props to their immediate inner elements.
+
+### A word of warning
+`react-pdf-pages` is intended as a low-level way to control when and where PDF pages are rendered. Rendering many pages at a time can cause browsers to hang and crash. If you want to display an entire PDF, it's recommended that you use some sort of virtualization library such as `react-virtualized` to limit the number of pages that get mounted at any one time.
 
 ## Importing PDF.js
 To use `react-pdf-pages`, you must include PDF.js in the page as the global `PDFJS`. To do this, it's recommended that you include `pdfjs-dist` in your bundle, like so:
