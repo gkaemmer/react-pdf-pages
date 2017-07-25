@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 function buildPages(file) {
   let arr = [];
@@ -19,13 +20,13 @@ export default class PDF extends Component {
   total = 100;
 
   static propTypes = {
-    onProgress: React.PropTypes.func,
-    onComplete: React.PropTypes.func,
-    onError: React.PropTypes.func,
-    url: React.PropTypes.string.isRequired,
-    headers: React.PropTypes.object,
-    style: React.PropTypes.object,
-    className: React.PropTypes.string
+    onProgress: PropTypes.func,
+    onComplete: PropTypes.func,
+    onError: PropTypes.func,
+    url: PropTypes.string.isRequired,
+    headers: PropTypes.object,
+    style: PropTypes.object,
+    className: PropTypes.string
   };
 
   onProgress(progressData) {

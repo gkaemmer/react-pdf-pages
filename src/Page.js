@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 
 export default class Page extends Component {
   static propTypes = {
-    page: React.PropTypes.shape({
-      key: React.PropTypes.number.isRequired,
-      file: React.PropTypes.shape({
-        getPage: React.PropTypes.func.isRequired
+    page: PropTypes.shape({
+      key: PropTypes.number.isRequired,
+      file: PropTypes.shape({
+        getPage: PropTypes.func.isRequired
       })
     }).isRequired
   };
