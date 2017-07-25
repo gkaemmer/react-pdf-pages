@@ -1,4 +1,7 @@
 ### v0.1.7
+- Use `prop-types` to avoid React.PropTypes deprecation warnings.
+
+### v0.1.7
 - Pass raw PDFJS `file` object as second argument to `onComplete`.
 
 ### v0.1.6
