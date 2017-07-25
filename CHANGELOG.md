@@ -1,4 +1,4 @@
-### v0.1.7
+### v0.1.8
 - Use `prop-types` to avoid React.PropTypes deprecation warnings.
 
 ### v0.1.7
