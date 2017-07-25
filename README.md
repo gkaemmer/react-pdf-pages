@@ -1,4 +1,4 @@
-# react-pdf-pages
+# react-pdf-pages [![npm](https://img.shields.io/npm/v/react-pdf-pages.svg)](https://www.npmjs.com/package/react-pdf-pages) [![npm](https://img.shields.io/npm/dm/react-pdf-pages.svg)](https://www.npmjs.com/package/react-pdf-pages)
 Simple, adaptable component to render PDF files in React.
 
 ## Installation
