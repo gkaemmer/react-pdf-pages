@@ -9,19 +9,19 @@ Simple, adaptable component to render PDF files in React.
 
 `react-pdf-pages` exports two components `PDF` and `Page`, which you can import like this:
 
-```
+```js
 import PDF, { Page } from 'react-pdf-pages';
 ```
 
 The `PDF` components handles the loading of the file, which you pass to it as a URL:
 
-```
+```js
 <PDF url="/path/to/file.pdf" ...>
 ```
 
 The `PDF` component renders nothing on its own, but is intended to wrap `Page`s so that you can style them yourself. Minimal example:
 
-```
+```js
 class PDFViewer extends Component {
   constructor(props) {
     super(props);
@@ -74,7 +74,7 @@ Both `PDF` and `Page` will pass the `style` and `className` props to their immed
 ## Importing PDF.js
 To use `react-pdf-pages`, you must include PDF.js in the page as the global `PDFJS`. To do this, it's recommended that you include `pdfjs-dist` in your bundle, like so:
 
-```
+```js
 // client.js
 import 'pdfjs-dist';
 
@@ -88,7 +88,7 @@ PDFJS.workerSrc = require('file-loader!pdfjs-dist/build/pdf.worker.min.js');
 
 ## Complete Example
 
-```
+```js
 import 'pdfjs-dist';
 import PDF, { Page } from 'react-pdf-pages';
 PDFJS.workerSrc = require('file-loader!pdfjs-dist/build/pdf.worker.min.js');
